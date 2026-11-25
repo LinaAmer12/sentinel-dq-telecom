@@ -108,7 +108,7 @@ docs/            Architecture diagrams, guides and runbooks
 
 Prerequisites: Docker, Python 3.10+, a Databricks workspace with a SQL warehouse, and Power BI Desktop for the report.
 
-1. **Configure secrets.** Copy `.env.example` to `.env` (and `airflow/.env.example` to `airflow/.env`) and fill in your Databricks host and token. Secrets are read from environment variables and are never committed.
+1. **Configure secrets.** Create a `.env` file in the repo root and in `airflow/` (both are git-ignored) with `DATABRICKS_HOST`, `DATABRICKS_TOKEN` and, for the review app, `DATABRICKS_HTTP_PATH`. Secrets are read from environment variables and are never committed.
 2. **Start the sources.** `docker compose up -d` starts PostgreSQL, Kafka and Debezium. Register the connector with `debezium/scripts/register_connector.sh`.
 3. **Load data.** Seed Postgres and upload batch files with the scripts in `generators/`.
 4. **Run the pipeline.** Start Airflow from `airflow/` (`docker compose up -d --build`, UI on http://localhost:8080) and trigger `sentinel_pipeline`.
